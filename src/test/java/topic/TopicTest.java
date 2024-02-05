@@ -19,12 +19,17 @@ public class TopicTest {
         Topic.addTopic(true,true);
     }
 
-//    @Test(priority = 2)//审核选题
+    @Test(priority = 2)//编辑选题
+    public void testEditTopic() throws InterruptedException {
+        Topic.editTopic();
+    }
+
+//    @Test(priority = 3)//审核选题
 //    public void testAudit() throws InterruptedException {
 //        Topic.audit();
 //    }
 
-    @Test(priority = 3)//删除选题
+    @Test(priority = 4)//删除选题
     public void testDelete() throws InterruptedException {
         Topic.delete();
     }

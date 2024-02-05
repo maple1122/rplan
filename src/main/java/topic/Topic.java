@@ -11,6 +11,7 @@ import java.util.List;
 
 /**
  * @author wufeng
+ * 添加、审核、删除主题
  * @date 2024/2/4 9:31
  */
 public class Topic extends LoginPortal {
@@ -26,6 +27,30 @@ public class Topic extends LoginPortal {
         Thread.sleep(3000);
     }
 
+    //编辑选题
+    public static void editTopic() throws InterruptedException {
+        statusFilter("未生效");
+        if (CommonMethod.isJudgingElement(driver, By.xpath("//div[@class='list']/div"))) {
+            driver.findElement(By.xpath("//div[@class='list']/div[1]/div[2]/a")).click();//点击标题进到详情页
+            Thread.sleep(1000);
+            driver.findElement(By.xpath("//header/button/span")).click();//点击编辑
+            Thread.sleep(500);
+            driver.findElement(By.xpath("//form/div[1]/div/div/input")).clear();//清空标题框
+            driver.findElement(By.xpath("//form/div[1]/div/div/input")).sendKeys("autoTest-update-" + System.currentTimeMillis());//录入新标题
+            driver.findElement(By.xpath("//form/div[2]/div/div/textarea")).sendKeys("-update-" + System.currentTimeMillis());//编辑描述
+            driver.findElement(By.cssSelector("button.el-button.save.el-button--default")).click();//点击保存
+            Thread.sleep(1000);
+            for (int i=0;i<3;i++){
+                if (CommonMethod.isJudgingElement(driver,By.cssSelector("i.icon.el-icon-circle-close"))){
+                    driver.findElement(By.cssSelector("i.icon.el-icon-circle-close")).click();
+                }
+                Thread.sleep(1000);
+            }
+            System.out.println("~~~ editTopic()，编辑选题，执行成功 ~~~");
+        } else System.out.println("没有auto测试数据");
+        Thread.sleep(3000);
+    }
+
     //审核选题
     public static void audit() throws InterruptedException {
         statusFilter("未生效");//筛选未生效状态，
@@ -35,7 +60,7 @@ public class Topic extends LoginPortal {
             Thread.sleep(500);
             driver.findElement(By.cssSelector("button.el-button.el-button--default.el-button--small.el-button--primary")).click();
             System.out.println("~~~ audit()，审核选题，执行成功 ~~~");
-        }else System.out.println("没有auto测试数据");
+        } else System.out.println("没有auto测试数据");
         Thread.sleep(3000);
     }
 
@@ -48,7 +73,7 @@ public class Topic extends LoginPortal {
             Thread.sleep(500);
             driver.findElement(By.cssSelector("button.el-button.el-button--default.el-button--small.el-button--primary")).click();
             System.out.println("~~~ delete()，删除选题，执行成功 ~~~");
-        }else System.out.println("没有auto测试数据");
+        } else System.out.println("没有auto测试数据");
         Thread.sleep(3000);
     }
 

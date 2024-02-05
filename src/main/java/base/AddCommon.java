@@ -68,46 +68,53 @@ public class AddCommon {
         List<WebElement> elements = driver.findElements(By.xpath("//main/form/div"));
         boolean addInterView = false;
         for (int i = 0; i < elements.size(); i++) {
-            if (CommonMethod.isJudgingElement(elements.get(i), By.xpath("./label"))) {
+            if (CommonMethod.isJudgingElement(elements.get(i), By.xpath("./label"))) {//校验是否是有效内容项
+                //录入标题
                 if (elements.get(i).findElement(By.xpath("./label")).getText().contains("标题")) {
                     elements.get(i).findElement(By.xpath("./div/div/input")).sendKeys("autoTest选题-" + System.currentTimeMillis());
                 }
+                //录入描述
                 if (elements.get(i).findElement(By.xpath("./label")).getText().contains("描述")) {
                     elements.get(i).findElement(By.xpath("./div/div/textarea")).sendKeys("autoTest选题描述-" + System.currentTimeMillis());
                 }
+                //设置起止时间
                 if (elements.get(i).findElement(By.xpath("./label")).getText().contains("起止时间")) {
                     elements.get(i).findElement(By.xpath("./div/div/input[2]")).click();
                     Thread.sleep(200);
-                    driver.findElement(By.cssSelector("td.available.today.in-range.start-date.end-date")).click();
-                    driver.findElement(By.xpath("//div[@class='el-picker-panel__body']/div[2]/table/tbody/tr[last()-1]/td[1]")).click();
+                    driver.findElement(By.cssSelector("td.available.today.in-range.start-date.end-date")).click();//点击下个月
+                    driver.findElement(By.xpath("//div[@class='el-picker-panel__body']/div[2]/table/tbody/tr[last()-1]/td[1]")).click();//点击下个月的某一天
                 }
+                //是否是部门线索
                 if (!isDepartment)
                     if (elements.get(i).findElement(By.xpath("./label")).getText().contains("选题级别"))
                         elements.get(i).findElement(By.xpath("./div/div/label[2]/span/span")).click();
+                //是否需要添加采访
                 if (hasInterView) {
                     if (elements.get(i).findElement(By.xpath("./label")).getText().contains("采访安排")) {
                         elements.get(i).findElement(By.xpath("./div/a")).click();
                         Thread.sleep(500);
-                        addInterView = addInterView(driver);
+                        addInterView = addInterView(driver);//调用添加采访安排
                         if (!addInterView) System.out.println("采访安排未添加成功");
                     }
                 }
+                //添加关联稿件
                 if (elements.get(i).findElement(By.xpath("./label")).getText().contains("关联稿件")) {
                     elements.get(i).findElement(By.xpath("./div/a")).click();
                     Thread.sleep(500);
                     addData(driver);
                 }
+                //添加所属主题
                 if (elements.get(i).findElement(By.xpath("./label")).getText().contains("所属主题")) {
                     elements.get(i).findElement(By.xpath("./div/a")).click();
                     Thread.sleep(500);
                     addData(driver);
                 }
+                //添加线索
                 if (elements.get(i).findElement(By.xpath("./label")).getText().contains("线索")) {
                     elements.get(i).findElement(By.xpath("./div/a")).click();
                     Thread.sleep(500);
                     addData(driver);
                 }
-
             }
             Thread.sleep(500);
         }
@@ -124,16 +131,16 @@ public class AddCommon {
         for (int i = 0; i < elements.size(); i++) {
             if (CommonMethod.isJudgingElement(elements.get(i), By.xpath("./label"))) {
                 //录入标题
-                if (elements.get(i).findElement(By.xpath("./label")).getText().contains("标题")) {
+                if (elements.get(i).findElement(By.xpath("./label")).getText().contains("标题")) {//
                     elements.get(i).findElement(By.xpath("./div/div/input")).sendKeys("autoTest线索-" + System.currentTimeMillis());
                 }
                 //选择线索来源
                 if (elements.get(i).findElement(By.xpath("./label")).getText().contains("线索来源")) {
-                    elements.get(i).findElement(By.xpath("./div/div/div/div")).click();
-                    List<WebElement> list = driver.findElements(By.cssSelector("div.el-select-dropdown.el-popper"));
+                    elements.get(i).findElement(By.xpath("./div/div/div/div")).click();//点击线索来源下拉框
+                    List<WebElement> list = driver.findElements(By.cssSelector("div.el-select-dropdown.el-popper"));//线索来源列表
                     for (int li = 0; li < list.size(); li++) {
                         if (!list.get(li).getAttribute("style").contains("display")) {
-                            list.get(li).findElement(By.xpath("./div/div/ul/li[last()]")).click();
+                            list.get(li).findElement(By.xpath("./div/div/ul/li[last()]")).click();//选择最后一条线索来源“其他”
                             break;
                         }
                     }
