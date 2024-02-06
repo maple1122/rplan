@@ -156,7 +156,7 @@ public class AddCommon {
     }
 
     //添加采访任务
-    private static boolean addInterView(WebDriver driver) throws InterruptedException {
+    public static boolean addInterView(WebDriver driver) throws InterruptedException {
         boolean hasReporter = false;
         List<WebElement> list = driver.findElements(By.xpath("//form[@class='el-form']/div"));
         for (int i = 0; i < list.size(); i++) {
@@ -164,13 +164,29 @@ public class AddCommon {
                 if (list.get(i).findElement(By.xpath("./label")).getText().contains("采访时间")) {
                     list.get(i).findElement(By.xpath("./div/div/div")).click();
                     Thread.sleep(500);
-                    driver.findElement(By.cssSelector("button.el-picker-panel__icon-btn.el-date-picker__next-btn.el-icon-arrow-right")).click();//点击下个月
-                    Thread.sleep(500);
-                    driver.findElement(By.xpath("//div[@class='el-picker-panel__content']/table/tbody/tr[3]/td/div")).click();//点击某个日期
-                    driver.findElement(By.xpath("//div[@class='el-date-picker__time-header']/span[2]/div/input")).sendKeys("08:00:00");//设置时间
-                    driver.findElement(By.cssSelector("button.el-time-panel__btn.confirm")).click();//设置时间的确定
-                    Thread.sleep(200);
-                    driver.findElement(By.cssSelector("button.el-button.el-picker-panel__link-btn.el-button--default.el-button--mini.is-plain")).click();//点击确定关闭日期控件
+                    List<WebElement> dateDivs = driver.findElements(By.cssSelector("div.el-picker-panel.el-date-picker.el-popper"));
+                    for (int d = 0; d < dateDivs.size(); d++) {
+                        if (!dateDivs.get(d).getAttribute("style").contains("display")) {//有效图层
+                            dateDivs.get(d).findElement(By.xpath("./div/div/div[2]/button[last()]")).click();//点击下个月
+                            Thread.sleep(500);
+                            dateDivs.get(d).findElement(By.xpath("./div/div/div[3]/table/tbody/tr[3]/td/div")).click();//点击某个日期
+                            Thread.sleep(500);
+                            dateDivs.get(d).findElement(By.xpath("./div/div/div/span[2]/div/input")).clear();
+                            dateDivs.get(d).findElement(By.xpath("./div/div/div/span[2]/div/input")).sendKeys("08:00:00");
+                            driver.findElement(By.cssSelector("button.el-time-panel__btn.confirm")).click();//设置时间的确定
+                            Thread.sleep(500);
+                            dateDivs.get(d).findElement(By.xpath("./div[2]/button[2]")).click();
+                            Thread.sleep(500);
+                            break;
+                        }
+                    }
+//                    driver.findElement(By.cssSelector("button.el-picker-panel__icon-btn.el-date-picker__next-btn.el-icon-arrow-right")).click();//点击下个月
+//                    Thread.sleep(500);
+//                    driver.findElement(By.xpath("//div[@class='el-picker-panel__content']/table/tbody/tr[3]/td/div")).click();//点击某个日期
+//                    driver.findElement(By.xpath("//div[@class='el-date-picker__time-header']/span[2]/div/input")).sendKeys("08:00:00");//设置时间
+//                    driver.findElement(By.cssSelector("button.el-time-panel__btn.confirm")).click();//设置时间的确定
+//                    Thread.sleep(200);
+//                    driver.findElement(By.cssSelector("button.el-button.el-picker-panel__link-btn.el-button--default.el-button--mini.is-plain")).click();//点击确定关闭日期控件
                 }
                 if (list.get(i).findElement(By.xpath("./label")).getText().contains("采访记者")) {
                     list.get(i).findElement(By.xpath("./div/div/div")).click();

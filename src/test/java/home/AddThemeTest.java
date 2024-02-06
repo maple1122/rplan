@@ -10,6 +10,7 @@ import static org.testng.Assert.*;
 
 /**
  * @author wufeng
+ * 新建主题
  * @date 2024/1/31 15:01
  */
 public class AddThemeTest {

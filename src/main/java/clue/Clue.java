@@ -35,6 +35,10 @@ public class Clue extends LoginPortal {
             driver.findElement(By.xpath("//table[@class='el-table__body']/tbody/tr[1]/td[1]/div/label/span")).click();//点击复选框
             getButton("选题");//点击加入选题
             Thread.sleep(1000);
+            driver.findElement(By.linkText("添加安排")).click();
+            Thread.sleep(500);
+            AddCommon.addInterView(driver);
+            Thread.sleep(1000);
             driver.findElement(By.xpath("//header/button[1]")).click();//点击保存
             Thread.sleep(3000);
             driver.findElement(By.cssSelector("i.icon.el-icon-circle-close")).click();//点击关闭
