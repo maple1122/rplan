@@ -103,7 +103,7 @@ public class Topic extends LoginPortal {
     static {
         try {
             driver = login();
-            driver.get(domain + "/rplan/static/index.html#/Topic");//跳转到宣传主题页面
+            driver.get(domain + "/rplan/static/index.html#/Topic");//跳转到选题研判页面
             Thread.sleep(2000);
         } catch (InterruptedException e) {
             e.printStackTrace();
