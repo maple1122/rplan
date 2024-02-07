@@ -27,8 +27,6 @@ public class AddTheme extends LoginPortal {
         Thread.sleep(3000);
     }
 
-
-
     //初始化登录
     static {
         try {

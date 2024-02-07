@@ -17,8 +17,8 @@ public class AddTopicTest {
 
     @Test
     public void testAddTopic() throws InterruptedException {
-//        AddTopic.addTopic(true);
-//        AddTopic.addTopic(false);
+        AddTopic.addTopic(true);
+        AddTopic.addTopic(false);
         AddTopic.addTopic(false,true);
     }
 

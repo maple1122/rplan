@@ -180,13 +180,6 @@ public class AddCommon {
                             break;
                         }
                     }
-//                    driver.findElement(By.cssSelector("button.el-picker-panel__icon-btn.el-date-picker__next-btn.el-icon-arrow-right")).click();//点击下个月
-//                    Thread.sleep(500);
-//                    driver.findElement(By.xpath("//div[@class='el-picker-panel__content']/table/tbody/tr[3]/td/div")).click();//点击某个日期
-//                    driver.findElement(By.xpath("//div[@class='el-date-picker__time-header']/span[2]/div/input")).sendKeys("08:00:00");//设置时间
-//                    driver.findElement(By.cssSelector("button.el-time-panel__btn.confirm")).click();//设置时间的确定
-//                    Thread.sleep(200);
-//                    driver.findElement(By.cssSelector("button.el-button.el-picker-panel__link-btn.el-button--default.el-button--mini.is-plain")).click();//点击确定关闭日期控件
                 }
                 if (list.get(i).findElement(By.xpath("./label")).getText().contains("采访记者")) {
                     list.get(i).findElement(By.xpath("./div/div/div")).click();
