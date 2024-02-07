@@ -1,7 +1,16 @@
 <?xml version="1.0" encoding="utf-8" ?>
 <suite name="rplanTest" parallel="false">
     <test name="策划中心">
-        <class name=""></class>
+        <classes>
+            <class name="home.AddThemeTest"></class>
+            <class name="home.AddTopicTest"></class>
+            <class name="home.AddClueTest"></class>
+        </classes>
+        <classes>
+            <class name="theme.ThemeTest"></class>
+            <class name="topic.TopicTest"></class>
+            <class name="clue.ClueTest"></class>
+        </classes>
     </test>
     <listeners>
         <listener class-name="org.uncommons.reportng.HTMLReporter"/>
